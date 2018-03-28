@@ -11,6 +11,7 @@ class Categories extends Component {
 
   render() {
     const { categories } = this.props
+    console.log(categories)
     return (
       <div>
         <CategoriesList
@@ -27,9 +28,9 @@ function mapStateToProps({categories}) {
     }
 }
 
-function mapDispatchToProps() {
+function mapDispatchToProps(dispatch) {
     return {
-        getAllCategories
+      getAllCategories: () => dispatch(getAllCategories())
     }
 }
 

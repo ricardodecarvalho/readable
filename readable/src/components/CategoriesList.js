@@ -7,7 +7,13 @@ const CategoriesList = ({ categories }) => (
       <li>No categories found</li>
     )}
     {categories.map(categorie =>
-      <li><Link to="/">{categorie.name}</Link></li>
+      <li key={categorie.name}>
+        <Link to={{
+          pathname: categorie.path
+        }}>
+          {categorie.name}
+        </Link>
+      </li>
     )}
   </ul>
 )

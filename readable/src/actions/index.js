@@ -7,7 +7,8 @@ const loadCategories = categories => ({
 })
 
 export const getAllCategories = () => dispatch => {
-  ServerAPI.getCategories(categories => {
+  ServerAPI.getCategories()
+  .then(categories => {
     dispatch(loadCategories(categories))
   })
 }
