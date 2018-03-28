@@ -10,6 +10,16 @@ const categories = (state = [], action) => {
   }
 }
 
+const posts = (state = [], action) => {
+  console.log('REDUCE_ACTION: ', action)
+  switch (action.type) {
+    case types.LOAD_POSTS:
+    return action.posts
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
-  categories
+  categories, posts
 })

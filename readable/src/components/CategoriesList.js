@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { capitalize } from '../utils/helpers'
 
 const CategoriesList = ({ categories }) => (
   <ul>
@@ -7,11 +8,11 @@ const CategoriesList = ({ categories }) => (
       <li>No categories found</li>
     )}
     {categories.map(categorie =>
-      <li key={categorie.name}>
+      <li key={categorie.path}>
         <Link to={{
           pathname: categorie.path
         }}>
-          {categorie.name}
+          {capitalize(categorie.name)}
         </Link>
       </li>
     )}
