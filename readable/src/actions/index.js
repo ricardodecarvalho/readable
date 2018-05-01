@@ -11,6 +11,13 @@ const loadPosts = posts => ({
   posts
 })
 
+export function loadFilter (active_filter) {
+  return {
+    type: types.LOAD_FILTER,
+    active_filter
+  }
+}
+
 export const getAllCategories = () => dispatch => {
   ServerAPI.getCategories()
   .then(categories => {
@@ -20,6 +27,13 @@ export const getAllCategories = () => dispatch => {
 
 export const getAllPosts = () => dispatch => {
   ServerAPI.getPosts()
+  .then(posts => {
+    dispatch(loadPosts(posts))
+  })
+}
+
+export const getAllPostsByCategory = (category) => dispatch => {
+  ServerAPI.getPostsByCategory(category)
   .then(posts => {
     dispatch(loadPosts(posts))
   })

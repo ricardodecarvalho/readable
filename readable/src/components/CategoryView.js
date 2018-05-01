@@ -1,19 +1,25 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { capitalize } from '../utils/helpers'
 import { Link } from 'react-router-dom'
-import { sortPosts } from '../utils/helpers'
 
-class Posts extends Component {
+class CategoryView extends Component {
+  static propTypes = {
+    match: PropTypes.object.isRequired
+  }
+
   render() {
-    const { filter } = this.props;
-    const posts = sortPosts(this.props.posts, filter);
+    const { category } = this.props.match.params
+    const { posts } = this.props
     return (
       <div>
+        <h1>{capitalize(category)}</h1>
         <ul>
           {posts.length === 0 && (
             <li>No posts found</li>
           )}
-          {posts.map(post =>
+          {posts.filter((post) => post.category === category).map(post =>
             <li key={post.id}>
               <Link to={{
                 pathname: `${post.category}/${post.id}`
@@ -28,11 +34,10 @@ class Posts extends Component {
   }
 }
 
-function mapStateToProps({ posts, filter }) {
-    return {
-        posts,
-        filter
-    }
+function mapStateToProps ({ posts }) {
+  return {
+    posts
+  }
 }
 
-export default connect(mapStateToProps)(Posts)
+export default connect(mapStateToProps)(CategoryView)
